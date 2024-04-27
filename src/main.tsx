@@ -14,6 +14,7 @@ const manifestUrl =
     createBrowserRouter,
     createRoutesFromElements,
     Route,
+    Router,
     RouterProvider,
   } from "react-router-dom";
   import React from "react";
@@ -30,7 +31,8 @@ const router = createBrowserRouter(
       <Route path="index" element={<Index />} />
       <Route path="game" element={<Game />} />
     </Route>
-  )
+  ),
+  {basename: '/tontontonwebapp'}
 );
 
 
