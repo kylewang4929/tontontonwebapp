@@ -3,3 +3,19 @@
   --tg-theme-button-color: #2eaddc;
   --tg-theme-button-text-color: white;
 }
+
+.connect-button-wapper {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0px;
+  top: 80%;
+}
+.wallet-menu {
+  position: fixed;
+  display: inline-block;
+  right: 10px;
+  top: 10px;
+}

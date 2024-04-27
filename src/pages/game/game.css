@@ -1,0 +1,30 @@
+.game {
+  display: flex;
+  height: 100vh;
+  place-items: center;
+  place-content: center;
+  flex-direction: column;
+}
+
+.game__over {
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.game__submit {
+  margin-bottom: 1rem;
+}
+.option-button {
+  
+}
+.button-box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  padding: 3rem 0;
+}
+.button-box .my-button {
+  width: 24vw;
+  text-align: center;
+}

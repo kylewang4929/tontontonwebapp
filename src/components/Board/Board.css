@@ -1,0 +1,13 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+  flex: 2;
+}
+
+.board__top, .board__mid, .board__bottom {
+  display: flex;
+  width: 100%;
+  place-content: center;
+}
