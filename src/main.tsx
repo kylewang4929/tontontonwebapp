@@ -27,7 +27,8 @@ eruda.init();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
+    <Route path="/">
+      <Route path="" element={<Index />} />
       <Route path="index" element={<Index />} />
       <Route path="game" element={<Game />} />
     </Route>
