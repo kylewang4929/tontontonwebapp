@@ -34,7 +34,7 @@ class GameStore {
 
   speed = 700
 
-  remainTime = 10000
+  remainTime = 2000
 
   interval:any= null
   intervalRun:any= null
@@ -57,7 +57,7 @@ class GameStore {
           })
         }
       })
-    },300)
+    },100)
 
 
     this.intervalRun = setInterval(() => {
@@ -81,7 +81,7 @@ class GameStore {
       return this.getRandomMole();
     }
     const nowTime = new Date().getTime()
-    if ((nowTime - this.hideTime[randomMole]) < 200) {
+    if ((nowTime - this.hideTime[randomMole]) < 400) {
       // 保护期 重新计算
       return this.getRandomMole();
     }
