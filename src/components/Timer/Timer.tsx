@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { actionTypes } from "../../context/Reducer";
 import { useContextState } from "../../context/StateProvider";
+import gameState from "../../models/gameState";
 
 const Timer = () => {
-  const [state, dispatch] = useContextState() as any;
   const [timeLeft, setTimeLeft] = useState(30);
 
   useEffect(() => {
@@ -13,12 +13,9 @@ const Timer = () => {
         clearTimeout(timer);
       };
     } else {
-      dispatch({
-        type: actionTypes.END_GAME,
-        payload: {},
-      });
+      gameState.endGame();
     }
-  }, [timeLeft, dispatch]);
+  }, [timeLeft]);
 
   return <div className="timer">Time Left: {timeLeft}</div>;
 };

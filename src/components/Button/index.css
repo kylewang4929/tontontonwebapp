@@ -3,4 +3,8 @@
     border-radius: 30px;
     padding: 10px 24px;
     color: #fff;
+    cursor: pointer;
+}
+.my-button:active {
+    opacity: 0.6;
 }

@@ -1,21 +1,16 @@
 import React from "react";
-import { useContextState } from "../../context/StateProvider";
 
 import "./Score.css";
+import gameState from "../../models/gameState";
+import { observer } from "mobx-react-lite";
 
-const Score = () => {
-  const [
-    {
-      playerName,
-      gameState: { score },
-    },
-  ] = useContextState() as any;
-
+const Score = observer(() => {
+  const score = gameState.gameState.score
   return (
     <div className="score">
       Score: {score}
     </div>
   );
-};
+});
 
 export default Score;

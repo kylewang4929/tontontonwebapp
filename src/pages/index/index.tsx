@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { useTonConnect } from "../../hooks/useTonConnect";
 import ButtonCom from '../../components/Button';
 import { useNavigate } from "react-router-dom";
-
+import './index.css'
+import Game from "../game";
+import { observer } from "mobx-react-lite";
+import gameState from "../../models/gameState";
 const StyledApp = styled.div`
   background-color: #e8e8e8;
   color: black;
@@ -24,24 +27,36 @@ const AppContainer = styled.div`
 `;
 
 
-export default () => {
-    const { wallet } = useTonConnect();
-
-    const navigate = useNavigate();
-    return (
-        <StyledApp>
-            <AppContainer>
-                <div className="connect-button-wapper">
+export default observer(() => {
+  const { wallet } = useTonConnect();
+  const navigate = useNavigate();
+  return (
+      <StyledApp className="page">
+          <AppContainer>
+              <div className="connect-button-wapper">
                 {
-                    !wallet ? <TonConnectButton /> : <ButtonCom onClick={() => {
-                      navigate('/game')
-                    }}>Start Game</ButtonCom>
+                  !gameState.start && (
+                    <>
+                      {
+                          !wallet ? <TonConnectButton /> : <ButtonCom onClick={() => {
+                            gameState.startGame()
+                          }}>Start Game</ButtonCom>
+                      }
+                    </>
+                  )
                 }
-                </div>
-                {
+              
+              </div>
+              {
                 !!wallet && <div className="wallet-menu"><TonConnectButton /></div>
-                }
-            </AppContainer>
-        </StyledApp>
-    )
-}
+              }
+
+              {
+                gameState.start && (
+                  <Game></Game>
+                )
+              }
+          </AppContainer>
+      </StyledApp>
+  )
+})

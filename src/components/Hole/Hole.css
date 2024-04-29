@@ -1,18 +1,17 @@
 .hole {
   border-radius: 50%;
-  width: 20vw;
-  height: 20vw;
-  margin: 1rem;
-  border: 0.5rem solid #fff;
+  width: 30vw;
+  height: 30vw;
+  background-size: cover;
+  margin: 0.4rem;
+  background-image: url('../../assets/tukeng.png');
   display: flex;
   place-items: center;
   place-content: center;
 }
 
 .hole__mole{
-  width: 16vw;
-  height: 16vw;
-  background-color: brown;
-  border-radius: 50%;
+  width: 20vw;
+  height: 20vw;
   cursor: pointer;
 }

@@ -4,47 +4,30 @@ import { actionTypes } from "../../context/Reducer";
 import { useContextState } from "../../context/StateProvider";
 
 import "./Hole.css";
+import gameState from "../../models/gameState";
+import { observer } from "mobx-react-lite";
 
-const Hole = ({ moleId }: any) => {
-  const [mole, setMole] = useState(false);
-  const [
-    {
-      gameState: { moles, gameStarted },
-    },
-    dispatch,
-  ] = useContextState() as any;
-
+const Hole = observer(({ moleId }: any) => {
+  const {moles} = gameState.gameState;
+  const { start: gameStarted } = gameState;
+ 
   const handleMoleClicked = (moleId: any) => {
     if (!gameStarted) {
       return;
     }
-    dispatch({
-      type: actionTypes.WHACK_MOLE,
-      payload: {
-        moleId: moleId,
-      },
-    });
+    gameState.whackMole({moleId: moleId})
   };
 
-  useEffect(() => {
-    if (!moles) {
-      return;
-    }
-    const moleState = moles[moleId];
-    setMole(moleState);
-  }, [moles, moleId]);
 
-  if (mole) {
+  if (moles[moleId]) {
+    const typeData = gameState.types[moles[moleId]]
     return (
       <div className="hole">
-        <div
-          className="hole__mole"
-          onClick={() => handleMoleClicked(moleId)}
-        ></div>
+        <img onClick={() => handleMoleClicked(moleId)} className="hole__mole" src={typeData.icon}></img>
       </div>
     );
   }
   return <div className="hole"></div>;
-};
+});
 
 export default Hole;
