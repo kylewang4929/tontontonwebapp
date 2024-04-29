@@ -4,7 +4,8 @@
   height: 30vw;
   background-size: cover;
   margin: 0.4rem;
-  background-image: url('../../assets/tukeng.png');
+  position: relative;
+  background-image: url('../../assets/tukeng_wapper.png');
   display: flex;
   place-items: center;
   place-content: center;
@@ -12,6 +13,30 @@
 
 .hole__mole{
   width: 20vw;
-  height: 20vw;
+  height: 24vw;
   cursor: pointer;
+  position: relative;
+  top: 24vw;
+  transition: top 0.175s ease-in-out;
+}
+.hole__mole.active{
+  top: 0;
+}
+.hole__mole__wapper {
+  width: 30vw;
+  height: 20vw;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+.hole__mask {
+  width: 30vw;
+  height: 30vw;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
 }

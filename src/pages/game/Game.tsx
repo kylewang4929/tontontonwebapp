@@ -16,20 +16,7 @@ const Game = observer(() => {
     gameState: { gameOver, moles, score },
   } = gameState;
   
-  useEffect(() => {
-    const activeMoles = moles.filter((mole: any) => mole).length;
-    if (!gameOver && activeMoles < gameState.maxActive && gameStarted) {
-      const randomMole = Math.floor(Math.random() * Math.floor(8) + 1);
-
-      const newMole = setTimeout(() => {
-        gameState.addRandomMole({moleId: randomMole});
-      }, gameState.speed);
-
-      return () => {
-        clearTimeout(newMole);
-      };
-    }
-  }, [moles, gameStarted]);
+  
 
   const handleResetGame = () => {
     gameState.resetGame();

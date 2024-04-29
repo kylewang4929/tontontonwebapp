@@ -28,13 +28,16 @@ class GameStore {
     ...defaultData
   }
 
-  maxActive = 3;
+  hideTime = [0,0,0,0,0,0,0,0,0]
 
-  speed = 500
+  maxActive = 7;
+
+  speed = 300
 
   remainTime = 2000
 
   interval:any= null
+  intervalRun:any= null
 
   constructor() {
     makeAutoObservable(this);
@@ -49,12 +52,40 @@ class GameStore {
           this.gameState.moleCreateTimes[i] = 0
           runInAction(() => {
             this.gameState.moles[i] = 0
-            this.gameState.moles = [...this.gameState.moles]
+            this.hideTime[i] = new Date().getTime()
+            // this.gameState.moles = [...this.gameState.moles]
           })
         }
       })
-    },200)
+    },300)
+
+
+    this.intervalRun = setInterval(() => {
+      const activeMoles = this.gameState.moles.filter((mole: any, i: number) => {
+        return mole
+      }).length;
+      if (!this.gameState.gameOver && activeMoles < this.maxActive && this.start) {
+        const randomMole = this.getRandomMole();
+        this.addRandomMole({moleId: randomMole});
+      }
+    }, this.speed)
     this.start = true
+  }
+
+  getRandomMole= (): number => {
+    // 找到下一个点
+    const randomMole = Math.floor(Math.random() * Math.floor(8) + 1);
+    const mole = this.gameState.moles[randomMole]
+    if (mole) {
+      // 重新计算
+      return this.getRandomMole();
+    }
+    const nowTime = new Date().getTime()
+    if ((nowTime - this.hideTime[randomMole]) < 200) {
+      // 保护期 重新计算
+      return this.getRandomMole();
+    }
+    return randomMole
   }
 
   resetGame = () => {
@@ -84,6 +115,7 @@ class GameStore {
     const newData = this.gameState.moles.map((mole: any, i: any) => {
       if (i === moleId) {
         this.gameState.moleCreateTimes[i] = 0
+        this.hideTime[i] = new Date().getTime()
         return 0;
       }
       return mole;
