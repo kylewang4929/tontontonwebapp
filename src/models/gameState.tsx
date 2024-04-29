@@ -32,9 +32,9 @@ class GameStore {
 
   maxActive = 7;
 
-  speed = 300
+  speed = 700
 
-  remainTime = 2000
+  remainTime = 10000
 
   interval:any= null
   intervalRun:any= null
