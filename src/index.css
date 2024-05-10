@@ -8,6 +8,9 @@ html, body {
     left: 0;
     top: 0;
 }
+div{
+    user-select: none;
+}
 #root {
     height: 100%;
 }
@@ -23,8 +26,8 @@ html, body {
 }
 
 .round-button {
-    width: 50px;
-    height: 50px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     background-color: var(--tg-theme-button-color);
     color: #fff;
