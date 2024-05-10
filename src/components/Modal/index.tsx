@@ -11,10 +11,9 @@ interface IModalParams {
     style?: any
     onCancel: any
 }
-export default observer(({title, show, width = 200, children, style, onCancel}: IModalParams) => {
-    if (!show) return null
+export default observer(({title, show, width = '100%', children, style, onCancel}: IModalParams) => {
   return (
-    <div className="modal-wapper">
+    <div className={`modal-wapper ${show? 'show': 'false'}`}>
         <div className="modal-inner" style={{width, ...style}}>
           <div className="modal-title">
             <div>{title}</div>

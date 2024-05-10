@@ -12,7 +12,7 @@ export default observer(() => {
         <button onClick={() => setShow(true)} className="mall-button round-button">M</button>
         <Modal title="商店" onCancel={() => {
             setShow(false)
-        }} show={show} width={'90%'} style={{backgroundColor: '#222'}}>
+        }} show={show} width={'100%'} style={{backgroundColor: '#222'}}>
             <div className="mall-modal-wapper">
                 <div className="mall-content">
                     {
@@ -29,7 +29,7 @@ export default observer(() => {
 
 const Item = ({name}: any) => {
     return (
-        <div style={{width: '33.33%', display: 'inline-block', textAlign: 'center', flexDirection: 'column'}}>
+        <div style={{width: '33.33%', color: '#fff', display: 'inline-block', textAlign: 'center'}}>
             <div className="mall-product" style={{display: 'inline-block'}}></div>
             <div>{name}</div>
         </div>

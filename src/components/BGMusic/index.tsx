@@ -41,7 +41,7 @@ const BGMusic = () => {
                 stop()
             }
         }} className={`round-button ${isPlay ? 'play-animate': ''}`} style={{ display: 'flex',justifyContent:'center',alignItems: 'center'}}>
-            <img src={musicIcon} style={{width: 40, height: 40}}></img>
+            <img src={musicIcon} style={{width: 32, height: 32}}></img>
         </div>
     );
 };
