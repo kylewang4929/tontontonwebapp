@@ -12,8 +12,12 @@
   "dependencies": {
     "@orbs-network/ton-access": "^2.2.2",
     "@tanstack/react-query": "^4.24.4",
+    "@tma.js/sdk": "^1.5.3",
+    "@tma.js/sdk-react": "^2.0.3",
     "@tonconnect/ui-react": "^2.0.0-beta.2",
     "@twa-dev/sdk": "^6.4.2",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
+    "axios": "^1.6.8",
     "buffer": "^6.0.3",
     "eruda": "^3.0.1",
     "is-mobile": "^3.1.1",
@@ -36,6 +40,7 @@
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^3.0.1",
     "typescript": "^4.9.5",
-    "vite": "^4.0.4"
+    "vite": "^4.0.4",
+    "vite-plugin-mkcert": "^1.17.5"
   }
 }

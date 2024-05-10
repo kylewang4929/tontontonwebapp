@@ -6,6 +6,7 @@ import "./App.css";
 import "@twa-dev/sdk";
 import eruda from 'eruda'
 import "./index.css";
+import bgm from './assets/bgm.mp3';
 // this manifest is used temporarily for development purposes
 const manifestUrl =
   "https://raw.githubusercontent.com/ton-community/tutorials/main/03-client/test/public/tonconnect-manifest.json";
@@ -22,7 +23,10 @@ const manifestUrl =
 
 import Index from './pages/index';
 import Game from './pages/game';
-
+import { SDKProvider, DisplayGate, type SDKInitOptions } from '@tma.js/sdk-react';
+import mall from "./models/mall";
+import BGMusic from "./components/BGMusic";
+import Mall from "./containers/Mall";
 eruda.init();
 
 const router = createBrowserRouter(
@@ -41,13 +45,65 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
+const options: SDKInitOptions = {
+};
+interface SDKProviderErrorProps {
+  error: unknown;
+}
+
+function SDKProviderError({ error }: SDKProviderErrorProps) {
+  return (
+    <div className="empty-page">
+      Oops. Something went wrong.
+      <div>
+        <blockquote>
+          <code>
+            {error instanceof Error
+              ? error.message
+              : JSON.stringify(error)}
+          </code>
+        </blockquote>
+      </div>
+    </div>
+  );
+}
+
+function SDKProviderLoading() {
+  return <div className="empty-page">loading...</div>;
+}
+
+function SDKInitialState() {
+  return <div className="empty-page">Waiting for initialization to start.</div>;
+}
+
+const App = () => {
+  return (
+    // <SDKProvider options={options}>
+    <>
+      <div className="options-button">
+        <BGMusic></BGMusic>
+        <Mall></Mall>
+      </div>
+      <TonConnectUIProvider manifestUrl={manifestUrl}>
+        <QueryClientProvider client={queryClient}>
+          {/* <App /> */}
+          <React.StrictMode>
+            {/* <DisplayGate
+              error={SDKProviderError}
+              loading={SDKProviderLoading}
+              initial={SDKInitialState}
+            >
+              <RouterProvider router={router} />
+            </DisplayGate> */}
+            <RouterProvider router={router} />
+
+          </React.StrictMode>
+        </QueryClientProvider>
+      </TonConnectUIProvider>
+    </>
+  // </SDKProvider>
+  )
+}
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <TonConnectUIProvider manifestUrl={manifestUrl}>
-    <QueryClientProvider client={queryClient}>
-      {/* <App /> */}
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
-    </QueryClientProvider>
-  </TonConnectUIProvider>
+  <App></App>
 );

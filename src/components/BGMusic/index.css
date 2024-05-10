@@ -1,0 +1,12 @@
+@keyframes rotate {
+    from {
+        transform: rotate(0deg); /* 从 0 度开始旋转 */
+    }
+    to {
+        transform: rotate(360deg); /* 旋转到 360 度 */
+    }
+}
+
+.round-button.play-animate {
+    animation: rotate 2s linear infinite; /* 应用名为 "rotate" 的动画，持续时间为 2 秒，线性运动，无限循环 */
+}

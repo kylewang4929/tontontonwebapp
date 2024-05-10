@@ -4,6 +4,7 @@ import elephant from '../assets/elephant.png';
 import lion from '../assets/lion.png';
 import moleIcon from '../assets/mole.png';
 import monkey from '../assets/monkey.png';
+import { getGameConfig } from "../services/api";
 
 const defaultData = {
   gameOver: false,
@@ -12,7 +13,30 @@ const defaultData = {
   score: 0
 }
 
+export interface IGameConfig {
+  remainCount: number
+  turnTime: number
+  weight: Weight
+}
+
+export interface Weight {
+  godzilla: number
+  mole: number
+  doge: number
+}
+
+
 class GameStore {
+
+  gameConfig: IGameConfig = {
+    remainCount: 0,
+    turnTime: 0,
+    weight: {
+      godzilla: 0,
+      mole: 0,
+      doge: 0
+    }
+  }
 
   types = [
     {icon: moleIcon, id: 0},
@@ -41,6 +65,15 @@ class GameStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.getConfig();
+  }
+
+  getConfig = async () => {
+    const data = await getGameConfig();
+    console.log('data', data)
+    if (data.status === 200) {
+      this.gameConfig = data.data
+    }
   }
 
   startGame = () => {

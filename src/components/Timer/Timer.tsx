@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { actionTypes } from "../../context/Reducer";
-import { useContextState } from "../../context/StateProvider";
 import gameState from "../../models/gameState";
 
 const Timer = () => {

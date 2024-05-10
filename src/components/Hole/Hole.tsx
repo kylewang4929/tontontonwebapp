@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { actionTypes } from "../../context/Reducer";
-
-import { useContextState } from "../../context/StateProvider";
 
 import "./Hole.css";
 import gameState from "../../models/gameState";
