@@ -5,13 +5,14 @@
 }
 
 .connect-button-wapper {
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  left: 0px;
-  top: 80%;
+  position: relative;
+  /* left: 0px;
+  bottom: 10%; */
 }
 .wallet-menu {
   position: fixed;

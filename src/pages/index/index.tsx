@@ -13,16 +13,13 @@ import { bindAccount, unBindAccount } from "../../services/api";
 import { useInitDataRaw } from "@tma.js/sdk-react";
 import mall from "../../models/mall";
 import Mall from "../../containers/Mall";
+import ToolBar from "../../containers/ToolBar";
+import Score from "../../components/Score/Score";
 const StyledApp = styled.div`
-  background-color: #e8e8e8;
+  background-color: #C4DB86;
   color: black;
 
-  @media (prefers-color-scheme: dark) {
-    background-color: #222;
-    color: white;
-  }
-  min-height: 100vh;
-  padding: 20px 20px;
+  height: 100vh;
 `;
 
 const AppContainer = styled.div`
@@ -40,28 +37,40 @@ export default observer(() => {
   // console.log('twaInitData', twaInitData)
 
   useEffect(() => {
-    addressRef.current = userFriendlyAddress;
+    if (addressRef.current !== userFriendlyAddress) {
+      addressRef.current = userFriendlyAddress;
+      // 保存一份
+      console.log('userFriendlyAddress', userFriendlyAddress)
+      gameState.tonAddress = userFriendlyAddress
+      gameState.getConfig();
+      gameState.queryUserInfo();
+      mall.query()
+    }
+    
   }, [userFriendlyAddress])
 
   useEffect(() => {
     const unsubscribe = tonConnectUI.onStatusChange(
         async (walletAndwalletInfo) => {
-          console.log('walletAndwalletInfo', walletAndwalletInfo)
           if (walletAndwalletInfo) {
+            if (localStorage.getItem('isBindAccount') === 'true') return;
             const newAddress = Address.parse(walletAndwalletInfo?.account.address).toString();
             const {publicKey, walletStateInit, chain} = walletAndwalletInfo?.account;
-            console.log('walletAndwalletInfo', newAddress)
             const bindRes = await bindAccount({
               address: newAddress,
               network: chain,
               publicKey,
               walletStateInit,
             })
-            console.log('bindRes', bindRes)
+            if (bindRes.status === 200) {
+              console.log('bindRes', bindRes)
+              localStorage.setItem('isBindAccount', "true")
+            }
           } else {
             // 断开，解绑
             const unBindRes = await unBindAccount({address: addressRef.current})
             console.log('bindRes', unBindRes)
+            localStorage.removeItem('isBindAccount')
           }
         } 
     );
@@ -73,13 +82,19 @@ export default observer(() => {
   const navigate = useNavigate();
   return (
       <StyledApp className="page">
-          <AppContainer>
+          <div className="app-container">
+              
+              {/* {
+                !!wallet && <div className="wallet-menu"><TonConnectButton /></div>
+              } */}
+              <Score />
+              <Game disabled={!gameState.start}></Game>
               <div className="connect-button-wapper">
                 {
                   !gameState.start && (
                     <>
                       {
-                          !wallet ? <TonConnectButton /> : <ButtonCom onClick={() => {
+                          !wallet ? <TonConnectButton /> : <ButtonCom style={{marginTop: '1rem',}} onClick={() => {
                             gameState.startGame()
                           }}>Start Game</ButtonCom>
                       }
@@ -88,16 +103,11 @@ export default observer(() => {
                 }
               
               </div>
-              {
-                !!wallet && <div className="wallet-menu"><TonConnectButton /></div>
-              }
-
-              {
-                gameState.start && (
-                  <Game></Game>
-                )
-              }
-          </AppContainer>
+              <div className="tool-bar-wapper">
+              { gameState.start && <ToolBar></ToolBar>}
+              </div>
+              {/* <ToolBar></ToolBar> */}
+          </div>
       </StyledApp>
   )
 })

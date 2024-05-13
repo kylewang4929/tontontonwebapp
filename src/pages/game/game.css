@@ -1,8 +1,10 @@
 .game {
   display: flex;
-  height: 100vh;
+  /* height: 100vh; */
   place-items: center;
   place-content: center;
+  width: 100%;
+  flex: 1;
   flex-direction: column;
 }
 

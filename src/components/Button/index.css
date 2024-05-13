@@ -1,8 +1,8 @@
 .my-button {
-    background-color: var(--tg-theme-button-color);
+    background-color: rgba(255,255,255,0.4);
     border-radius: 30px;
     padding: 10px 24px;
-    color: #fff;
+    color: #131313;
     cursor: pointer;
 }
 .my-button:active {

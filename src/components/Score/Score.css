@@ -1,4 +1,8 @@
 .score {
-  font-size: 2rem;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: bold;
+  text-align: center;
+  font-size: 3rem;
 }

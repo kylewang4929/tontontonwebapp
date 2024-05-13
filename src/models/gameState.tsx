@@ -1,15 +1,15 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import cock from '../assets/cock.png';
-import elephant from '../assets/elephant.png';
-import lion from '../assets/lion.png';
+import { makeAutoObservable, runInAction, toJS } from "mobx";
+import cock from '../assets/mole.png';
+import elephant from '../assets/mole.png';
+import lion from '../assets/mole.png';
 import moleIcon from '../assets/mole.png';
-import monkey from '../assets/monkey.png';
-import { getGameConfig } from "../services/api";
+import monkey from '../assets/mole.png';
+import { IGameTarget, getGameConfig, getUserProfile, submitGameData } from "../services/api";
 
 const defaultData = {
   gameOver: false,
-  moles: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  moleCreateTimes: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  moles: [0, 0, 0, 0, 0, 0, 0, 0, 0], // 动物类型
+  moleCreateTimes: [0, 0, 0, 0, 0, 0, 0, 0, 0], // 动物显示的时间
   score: 0
 }
 
@@ -25,8 +25,20 @@ export interface Weight {
   doge: number
 }
 
+export interface UserInfo {
+  address: string
+  balance: number
+  boost: number
+  point: number
+  connect: number
+  invitationCode: string
+  name: string
+}
 
 class GameStore {
+  userInfo:UserInfo | null = null
+
+  tonAddress = ''// 当前地址
 
   gameConfig: IGameConfig = {
     remainCount: 0,
@@ -38,6 +50,7 @@ class GameStore {
     }
   }
 
+  // 动物类型
   types = [
     {icon: moleIcon, id: 0},
     {icon: cock, id: 1},
@@ -52,7 +65,7 @@ class GameStore {
     ...defaultData
   }
 
-  hideTime = [0,0,0,0,0,0,0,0,0]
+  hideTime = [0,0,0,0,0,0,0,0,0] //消失的时间
 
   maxActive = 7;
 
@@ -60,12 +73,14 @@ class GameStore {
 
   remainTime = 2000
 
+  uploadCache: IGameTarget[] = []
+
   interval:any= null
+  submitInterval:any= null
   intervalRun:any= null
 
   constructor() {
     makeAutoObservable(this);
-    this.getConfig();
   }
 
   getConfig = async () => {
@@ -77,7 +92,7 @@ class GameStore {
   }
 
   startGame = () => {
-    this.interval && clearInterval(this.interval)
+    this.clean();
     this.interval = setInterval(() => {
       const nowTime = new Date().getTime()
       this.gameState.moleCreateTimes.map((item, i) => {
@@ -102,6 +117,17 @@ class GameStore {
         this.addRandomMole({moleId: randomMole});
       }
     }, this.speed)
+
+    this.submitInterval = setInterval(async () => {
+      console.log('this.uploadCache', toJS(this.uploadCache))
+      if (this.uploadCache.length > 0) {
+        const data = await submitGameData([...this.uploadCache])
+        console.log('submitGameData', data)
+        runInAction(() => {
+          this.uploadCache = [];
+        })
+      }
+    }, 2000)
     this.start = true
   }
 
@@ -123,8 +149,14 @@ class GameStore {
 
   resetGame = () => {
     this.start = false;
-    this.interval && clearInterval(this.interval)
     this.gameState = { ...defaultData }
+    this.clean();
+  }
+
+  clean = () => {
+    this.intervalRun && clearInterval(this.intervalRun)
+    this.interval && clearInterval(this.interval)
+    this.submitInterval && clearInterval(this.submitInterval)
   }
 
   getRandomType = () => {
@@ -145,6 +177,12 @@ class GameStore {
   }
 
   whackMole = ({ moleId }: { moleId: number }) => {
+    /**
+     * TODO 
+     * 计算积分
+     * 缓存数据
+     * 调用接口上报
+     */
     const newData = this.gameState.moles.map((mole: any, i: any) => {
       if (i === moleId) {
         this.gameState.moleCreateTimes[i] = 0
@@ -155,11 +193,25 @@ class GameStore {
     })
     this.gameState.moles = newData;
     this.gameState.score += 1
+
+    this.uploadCache.push({
+      target: 'mole',
+      hitTime: new Date().getTime()
+    })
   }
 
   endGame = () => {
-    this.interval && clearInterval(this.interval)
     this.gameState.gameOver = true
+    this.clean();
+
+  }
+
+  queryUserInfo = async () => {
+    const data = await getUserProfile();
+    console.log('data', data)
+    if (data.status === 200) {
+      this.gameState.score = data.data.point
+    }
   }
 
 }

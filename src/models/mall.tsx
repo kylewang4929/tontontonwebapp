@@ -25,7 +25,6 @@ class GameStore {
     products: IProduct[] = [];
   constructor() {
     makeAutoObservable(this);
-    this.query()
   }
 
   query = async () => {

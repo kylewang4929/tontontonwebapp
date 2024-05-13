@@ -82,7 +82,8 @@ const App = () => {
     <>
       <div className="options-button">
         <BGMusic></BGMusic>
-        <Mall></Mall>
+        {/* <Mall></Mall>
+        <div className="round-button">S</div> */}
       </div>
       <TonConnectUIProvider manifestUrl={manifestUrl}>
         <QueryClientProvider client={queryClient}>

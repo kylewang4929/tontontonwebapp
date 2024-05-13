@@ -1,6 +1,14 @@
 
 .page {
-    background-image: url('../../assets//bg.png');
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.app-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

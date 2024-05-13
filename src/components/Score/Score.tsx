@@ -8,7 +8,7 @@ const Score = observer(() => {
   const score = gameState.gameState.score
   return (
     <div className="score">
-      Score: {score}
+      {score}
     </div>
   );
 });

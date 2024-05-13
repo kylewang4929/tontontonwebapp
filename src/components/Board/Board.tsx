@@ -6,6 +6,7 @@ import "./Board.css";
 const Board = () => {
   return (
     <div className="board">
+      <div className="board-bg"></div>
       <div className="board__top">
         <Hole moleId={0} />
         <Hole moleId={1} />
