@@ -104,6 +104,7 @@ class GameStore {
 
   get speed() {
     const value = mapScopeToSpeed(this.gameState.score)
+    
     return value
   }
   getConfig = async () => {
