@@ -7,7 +7,8 @@ import monkey from '../assets/monkey.png';
 import { getGameConfig, getLeaderboard, getProducts } from "../services/api";
 
 interface ILeaderboard{
-
+  name: string;
+  integral: number
 }
 
 class Leaderboard {
