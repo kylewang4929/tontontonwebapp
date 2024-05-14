@@ -13,6 +13,7 @@ const datas = [
     {icon: huojianIcon, name: 'Boosts'},
 ]
 
+const TON_UNIT = 1000000000
 export default () => {
     const [tonConnectUI, setOptions] = useTonConnectUI();
     return (
@@ -20,12 +21,13 @@ export default () => {
             {
                 datas.map((item, index) => {
                     return <Item key={item.name} onClick={() => {
+                        // 先创建订单
                         const myTransaction = {
                             validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
                             messages: [
                                 {
                                     address: mainAddress,
-                                    amount: "100000000",
+                                    amount: `${TON_UNIT * 0.1}`,
                                     // stateInit: "base64bocblahblahblah==" // just for instance. Replace with your transaction initState or remove
                                 },
                             ]

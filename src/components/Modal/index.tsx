@@ -21,7 +21,9 @@ export default observer(({title, show, width = '100%', children, style, onCancel
               <img className="close-icon" src={closeImage}></img>
             </div>
             </div>
+          <div className="modal-content">
           {children}
+          </div>
         </div>
     </div>
   )

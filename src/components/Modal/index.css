@@ -22,7 +22,7 @@
     left: 0;
     bottom: 0;
     height: 94vh;
-    background-color: #fff;
+    background-color: #000;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     display: flex;
@@ -40,7 +40,7 @@
     text-align: center;
     border: none;
     width: 100%;
-    border-bottom: 1px solid #111111;
+    border-bottom: 1px solid #4b4b4b;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -60,4 +60,9 @@
 
 .close-wapper:active{
     opacity: 0.6;
+}
+.modal-content {
+    display: flex;
+    width: 100%;
+    flex: 1;
 }

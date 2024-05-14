@@ -15,6 +15,7 @@ import mall from "../../models/mall";
 import Mall from "../../containers/Mall";
 import ToolBar from "../../containers/ToolBar";
 import Score from "../../components/Score/Score";
+import Leaderboard from "../../containers/Leaderboard";
 const StyledApp = styled.div`
   background-color: #C4DB86;
   color: black;
@@ -31,28 +32,30 @@ export default observer(() => {
   mall.products;
   const [tonConnectUI] = useTonConnectUI();
   const { wallet } = useTonConnect();
-  const userFriendlyAddress = useTonAddress();
+  const rawAddress = useTonAddress(false);
   const addressRef = useRef('')
   // const twaInitData = useInitDataRaw();
   // console.log('twaInitData', twaInitData)
 
   useEffect(() => {
-    if (addressRef.current !== userFriendlyAddress) {
-      addressRef.current = userFriendlyAddress;
+    if (addressRef.current !== rawAddress) {
+      addressRef.current = rawAddress;
       // 保存一份
-      console.log('userFriendlyAddress', userFriendlyAddress)
-      gameState.tonAddress = userFriendlyAddress
+      const newAddressa = Address.parse(rawAddress).toString();
+      console.log('userFriendlyAddress', rawAddress, newAddressa)
+      gameState.tonAddress = newAddressa
       gameState.getConfig();
       gameState.queryUserInfo();
       mall.query()
     }
     
-  }, [userFriendlyAddress])
+  }, [rawAddress])
 
   useEffect(() => {
     const unsubscribe = tonConnectUI.onStatusChange(
         async (walletAndwalletInfo) => {
           if (walletAndwalletInfo) {
+
             if (localStorage.getItem('isBindAccount') === 'true') return;
             const newAddress = Address.parse(walletAndwalletInfo?.account.address).toString();
             const {publicKey, walletStateInit, chain} = walletAndwalletInfo?.account;
@@ -94,9 +97,16 @@ export default observer(() => {
                   !gameState.start && (
                     <>
                       {
-                          !wallet ? <TonConnectButton /> : <ButtonCom style={{marginTop: '1rem',}} onClick={() => {
-                            gameState.startGame()
-                          }}>Start Game</ButtonCom>
+                          !wallet ? <TonConnectButton /> : (
+                            <div>
+                              <ButtonCom onClick={() => {
+                                gameState.startGame()
+                              }}>
+                                Start Game
+                              </ButtonCom>
+                              <Leaderboard></Leaderboard>
+                            </div>
+                          )
                       }
                     </>
                   )
@@ -106,7 +116,6 @@ export default observer(() => {
               <div className="tool-bar-wapper">
               { gameState.start && <ToolBar></ToolBar>}
               </div>
-              {/* <ToolBar></ToolBar> */}
           </div>
       </StyledApp>
   )

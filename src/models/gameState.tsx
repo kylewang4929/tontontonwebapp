@@ -6,6 +6,24 @@ import moleIcon from '../assets/mole.png';
 import monkey from '../assets/mole.png';
 import { IGameTarget, getGameConfig, getUserProfile, submitGameData } from "../services/api";
 
+// const params = [
+//   {scope: 50, remainTime: 3000, speed: 1000, moleWeight: 0.7},
+//   {scope: 100, remainTime: 3000, speed: 1000, moleWeight: 0.7},
+//   {scope: 150, remainTime: 3000, speed: 1000, moleWeight: 0.7},
+//   {scope: 250, remainTime: 3000, speed: 1000, moleWeight: 0.7},
+//   {scope: 300, remainTime: 3000, speed: 1000, moleWeight: 0.7},
+//   {scope: 350, remainTime: 3000, speed: 1000, moleWeight: 0.7},
+//   {scope: 400, remainTime: 3000, speed: 1000, moleWeight: 0.7},
+// ]
+
+function mapScopeToRemainTime(x: number) {
+  return 1000
+}
+function mapScopeToSpeed(x: number) {
+  return 600
+}
+
+
 const defaultData = {
   gameOver: false,
   moles: [0, 0, 0, 0, 0, 0, 0, 0, 0], // 动物类型
@@ -45,7 +63,7 @@ class GameStore {
     turnTime: 0,
     weight: {
       godzilla: 0,
-      mole: 0,
+      mole: 10,
       doge: 0
     }
   }
@@ -69,23 +87,27 @@ class GameStore {
 
   maxActive = 7;
 
-  speed = 700
-
-  remainTime = 2000
-
   uploadCache: IGameTarget[] = []
 
   interval:any= null
   submitInterval:any= null
   intervalRun:any= null
+  prevAddTime: number = 0 // 上一次出现动物的时间
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  get remainTime() {
+    return mapScopeToRemainTime(this.gameState.score)
+  }
+
+  get speed() {
+    const value = mapScopeToSpeed(this.gameState.score)
+    return value
+  }
   getConfig = async () => {
     const data = await getGameConfig();
-    console.log('data', data)
     if (data.status === 200) {
       this.gameConfig = data.data
     }
@@ -113,10 +135,14 @@ class GameStore {
         return mole
       }).length;
       if (!this.gameState.gameOver && activeMoles < this.maxActive && this.start) {
-        const randomMole = this.getRandomMole();
-        this.addRandomMole({moleId: randomMole});
+        const currentTime = new Date().getTime();
+        if ((currentTime - this.prevAddTime) >= this.speed) {
+          const randomMole = this.getRandomMole();
+          this.addRandomMole({moleId: randomMole});
+          this.prevAddTime = new Date().getTime();
+        }
       }
-    }, this.speed)
+    }, 50)
 
     this.submitInterval = setInterval(async () => {
       console.log('this.uploadCache', toJS(this.uploadCache))
@@ -192,7 +218,7 @@ class GameStore {
       return mole;
     })
     this.gameState.moles = newData;
-    this.gameState.score += 1
+    this.gameState.score += (this.gameConfig.weight.mole * (this.userInfo?.boost || 1))
 
     this.uploadCache.push({
       target: 'mole',

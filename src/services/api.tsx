@@ -14,7 +14,10 @@ interface IBindAccountParams {
     publicKey?: string;
     walletStateInit: string
 }
-const host = 'http://120.79.55.90:8090'
+// const host = 'http://120.79.55.90:8090'
+// const host = ''
+const host = 'https://moleverse.net'
+
 export const bindAccount = async (params: IBindAccountParams) => {
     return await axios.post(`${host}/api/user/connectWallet`, {
         ...params
@@ -53,3 +56,14 @@ export const submitGameData = async (params: IGameTarget[]) => {
         hitList: params
     })
 }
+export const createOrder = async (params: IGameTarget[]) => {
+    return await axios.post(`${host}/api/game/pay`, {
+        hitList: params
+    })
+}
+
+export const getLeaderboard = async () => {
+    return await axios.get(`${host}/api/leaderboard`, {
+    })
+}
+
