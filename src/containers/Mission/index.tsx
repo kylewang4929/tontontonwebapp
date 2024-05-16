@@ -14,8 +14,8 @@ export default observer(() => {
         <div className="leaderboard">
             <Button style={{marginTop: '1rem',}} onClick={() => {
                 setOpen(true)
-            }}>Ranking</Button>
-            <Modal title="Ranking" onCancel={() => setOpen(false)} show={open}>
+            }}>Tasks</Button>
+            <Modal title="Tasks" onCancel={() => setOpen(false)} show={open}>
                 <div className="leaderboard-wapper">
                     {
                         leaderboard.datas.length === 0 && (

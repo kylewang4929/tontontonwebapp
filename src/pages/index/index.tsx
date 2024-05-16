@@ -16,6 +16,7 @@ import Mall from "../../containers/Mall";
 import ToolBar from "../../containers/ToolBar";
 import Score from "../../components/Score/Score";
 import Leaderboard from "../../containers/Leaderboard";
+import Mission from "../../containers/Mission";
 const StyledApp = styled.div`
   background-color: #C4DB86;
   color: black;
@@ -106,7 +107,10 @@ export default observer(() => {
                         }}>
                           Start Game
                         </ButtonCom>
-                        <Leaderboard></Leaderboard>
+                        <div className="button-grups">
+                          <Leaderboard></Leaderboard>
+                          <Mission></Mission>
+                        </div>
                       </div>
                     )
                   }

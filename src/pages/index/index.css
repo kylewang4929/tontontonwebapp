@@ -12,3 +12,8 @@
     align-items: center;
     flex-direction: column;
 }
+.button-grups {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

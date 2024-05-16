@@ -1,0 +1,49 @@
+.leaderboard {
+}
+.leaderboard-item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 1;
+    color: #fff;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 0.1rem solid #4b4b4b;
+}
+.leaderboard-name {
+    font-size: 1.2rem;
+}
+.leaderboard-value {
+    display: flex;
+    text-align: right;
+    font-size: 1.4rem;
+    flex: 1;
+    font-weight: bold;
+    justify-content: flex-end
+}
+.leaderboard-wapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+.leaderboard-empty {
+    color: #fff;
+    height: 20vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.leaderboard-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 3rem;
+    background-color: #ddd;
+    margin-right: 1rem;
+}
+.leaderboard-index {
+    font-size: 1.2rem;
+    padding-right: 1rem;
+}
