@@ -6,9 +6,11 @@ import { observer } from "mobx-react-lite";
 
 const Score = observer(() => {
   const score = gameState.gameState.score
+  const remainingTimes = gameState.userInfo?.life
   return (
     <div className="score">
       {score}
+      <div className="score-tips">Remaining times: {remainingTimes}</div>
     </div>
   );
 });

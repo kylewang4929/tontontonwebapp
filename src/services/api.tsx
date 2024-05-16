@@ -16,7 +16,8 @@ interface IBindAccountParams {
 }
 // const host = 'http://120.79.55.90:8090'
 // const host = ''
-const host = 'https://moleverse.net'
+// const host = 'https://moleverse.net'
+const host = 'https://www.gg4892hv.online'
 
 export const bindAccount = async (params: IBindAccountParams) => {
     return await axios.post(`${host}/api/user/connectWallet`, {
@@ -56,14 +57,56 @@ export const submitGameData = async (params: IGameTarget[]) => {
         hitList: params
     })
 }
-export const createOrder = async (params: IGameTarget[]) => {
-    return await axios.post(`${host}/api/game/pay`, {
-        hitList: params
+interface IOrderParams{
+    id: string // 商品id
+}
+export const createOrder = async (params: IOrderParams) => {
+    return await axios.post(`${host}/api/pay/create`, {
+        productName: params.id
     })
 }
 
+interface IUpdateOrderParasm {
+    orderId: string;
+    txId: string;
+    boc: string
+}
+export const updateOrder = async (p: IUpdateOrderParasm) => {
+    return await axios.post(`${host}/api/pay/update`, {
+        ...p
+    })
+}
+
+export interface IOrder {
+    orderId: string
+    createTime: string
+    status: 'init' | 'pending' |'success' | 'fail' | 'cancel'
+    itemData: IOrderItem
+  }
+  
+  export interface IOrderItem {
+    kind: string
+    name: string
+    price: number
+    currency: string
+  }
+  
+export const queryOrder = async (orderId: string) => {
+    return await axios.post<IOrder>(`${host}/api/pay/update`, {
+        orderId
+    })
+}
+
+
+
 export const getLeaderboard = async () => {
     return await axios.get(`${host}/api/leaderboard`, {
+    })
+}
+
+
+export const endGame = async () => {
+    return await axios.get(`${host}/api/game/end`, {
     })
 }
 

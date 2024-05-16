@@ -16,11 +16,23 @@
   height: 16vw;
   cursor: pointer;
   position: relative;
-  top: 24vw;
-  transition: top 0.175s ease-in-out;
+  /* top: 24vw; */
 }
+.hole__mole.un-active{
+  animation: holeOut 0.735s forwards;
+}
+
 .hole__mole.active{
-  top: 0;
+  animation: holeIn 0.375s forwards;
+}
+@keyframes holeIn {
+  0% { top: 24vw; }
+  100% { top: 0; }
+}
+@keyframes holeOut {
+  0% { top: 0; }
+  50% { top: 0; }
+  100% { top: 24vw; }
 }
 .hole__mole__wapper {
   width: 16vw;
