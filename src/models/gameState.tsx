@@ -295,7 +295,7 @@ class GameStore {
     }
     const hitTarget = this.types.find(item => item.id === hitType)
     if (hitTarget) {
-      const weightData = this.gameConfig.weight[hitTarget.name]
+      const weightData = this.gameConfig.weight[hitTarget.name as keyof Weight]
       this.gameState.moles = newData;
       this.gameState.score += (weightData * (this.userInfo?.boost || 1))
 
