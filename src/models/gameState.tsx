@@ -20,6 +20,7 @@ import blueIconK from '../assets/blue_k.png';
 
 import monkey from '../assets/mole.png';
 import { IGameTarget, endGame, getGameConfig, getUserProfile, submitGameData } from "../services/api";
+import music from "./music";
 
 const params = [
   {scope: 50, remainTime: 3000, speed: 1000, moleWeight: 1},
@@ -169,6 +170,7 @@ class GameStore {
   }
 
   startGame = () => {
+    music.run()
     this.clean();
     this.interval = setInterval(() => {
       const nowTime = new Date().getTime()
@@ -310,6 +312,8 @@ class GameStore {
   endGame = async () => {
     this.gameState.gameOver = true
     this.clean();
+    music.stop()
+
     await endGame();
     this.queryUserInfo();
   }

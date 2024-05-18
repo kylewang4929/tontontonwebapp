@@ -81,7 +81,7 @@ const App = () => {
     // <SDKProvider options={options}>
     <>
       <div className="options-button">
-        <BGMusic></BGMusic>
+        {/* <BGMusic></BGMusic> */}
         {/* <Mall></Mall>
         <div className="round-button">S</div> */}
       </div>
