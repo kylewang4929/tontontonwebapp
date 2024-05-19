@@ -115,8 +115,16 @@ export default observer(() => {
                 </>
               )
             }
-            <div style={{height: '20px'}}></div>
-            <ToolBar></ToolBar>
+
+            {
+              wallet && (
+                <>
+                  <div style={{height: '20px'}}></div>
+                  <ToolBar></ToolBar>
+                </>
+              )
+            }
+            
 
           </div>
         </div>
