@@ -25,9 +25,6 @@ const manifestUrl =
 import Index from './pages/index';
 import Game from './pages/game';
 import { SDKProvider, DisplayGate, type SDKInitOptions } from '@tma.js/sdk-react';
-import mall from "./models/products";
-import BGMusic from "./components/BGMusic";
-import Mall from "./containers/Mall";
 import Loading from "./containers/Loading";
 eruda.init();
 
