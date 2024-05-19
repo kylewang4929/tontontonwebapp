@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "@twa-dev/sdk";
 import eruda from 'eruda'
 import "./index.css";
+import '@tma.js/sdk'
 import bgm from './assets/bgm.mp3';
 // this manifest is used temporarily for development purposes
 const manifestUrl =
@@ -77,7 +78,11 @@ function SDKInitialState() {
 
 const App = () => {
   useEffect(() => {
-    (window as any).Telegram.WebApp.expand()
+    try {
+      (window as any).Telegram.WebApp.expand()
+    } catch (error) {
+      console.error(error)
+    }
   }, [])
   return (
     // <SDKProvider options={options}>
