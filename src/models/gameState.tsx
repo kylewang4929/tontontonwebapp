@@ -277,6 +277,7 @@ class GameStore {
      * 缓存数据
      * 调用接口上报
      */
+    music.runHit()
     let hitType = -1
     const newData = this.gameState.moles.map((mole: any, i: any) => {
       if (i === moleId) {

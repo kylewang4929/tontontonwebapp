@@ -8,7 +8,7 @@ import { getGameConfig, getLeaderboard, getProducts } from "../services/api";
 
 interface ILeaderboard{
   name: string;
-  integral: number
+  point: number
 }
 
 class Leaderboard {
@@ -22,7 +22,7 @@ class Leaderboard {
   query = async () => {
     const data = await getLeaderboard();
     if (data.status === 200) {
-      this.datas = data.data
+      this.datas = data.data.list
     }
   }
 }

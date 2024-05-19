@@ -30,11 +30,13 @@ class GameStore {
   query = async () => {
     const data = await getProducts();
     if (data.status === 200) {
-      this.products = Object.values(data.data).map((item: any) => {
+      const newData = Object.keys(data.data).map(key => {
         return {
-            ...item
+          ...data.data[key],
+          productId: key
         }
       })
+      this.products = newData.filter(item => item.currency === 'TON')
     }
   }
 }

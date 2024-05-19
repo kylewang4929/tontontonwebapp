@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://120.79.55.90:8090', // 要代理的目标地址
+        target: 'https://www.gg4892hv.online', // 要代理的目标地址
         changeOrigin: true,
         // rewrite: path => path.replace(/^\/api/, ''),
       }

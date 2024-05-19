@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import './index.css'
 import { observer } from "mobx-react-lite";
-
+import HashLoader from "react-spinners/HashLoader";
 import closeImage from './close.png';
 interface IModalParams {
     show: boolean
@@ -28,3 +28,20 @@ export default observer(({title, show, width = '100%', children, style, onCancel
     </div>
   )
 })
+
+const LoadingModal = ({show}: any) => {
+  if (!show) return null
+  return (
+    <div className={`modal-loading-wapper`}>
+       <div className="modal-loading-inner">
+        <HashLoader
+          color={'#fff'}
+          loading
+          size={69}
+          aria-label="loading"
+        />
+       </div>
+    </div>
+  )
+}
+export { LoadingModal}

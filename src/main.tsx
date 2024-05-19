@@ -2,7 +2,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import ReactDOM from "react-dom/client";
 import "./App.css";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "@twa-dev/sdk";
 import eruda from 'eruda'
 import "./index.css";
@@ -24,9 +25,10 @@ const manifestUrl =
 import Index from './pages/index';
 import Game from './pages/game';
 import { SDKProvider, DisplayGate, type SDKInitOptions } from '@tma.js/sdk-react';
-import mall from "./models/mall";
+import mall from "./models/products";
 import BGMusic from "./components/BGMusic";
 import Mall from "./containers/Mall";
+import Loading from "./containers/Loading";
 eruda.init();
 
 const router = createBrowserRouter(
@@ -83,11 +85,19 @@ const App = () => {
   return (
     // <SDKProvider options={options}>
     <>
-      <div className="options-button">
-        {/* <BGMusic></BGMusic> */}
-        {/* <Mall></Mall>
-        <div className="round-button">S</div> */}
-      </div>
+      <Loading></Loading>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <TonConnectUIProvider manifestUrl={manifestUrl}>
         <QueryClientProvider client={queryClient}>
           {/* <App /> */}

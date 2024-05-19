@@ -68,7 +68,6 @@ export const createOrder = async (params: IOrderParams) => {
 
 interface IUpdateOrderParasm {
     orderId: string;
-    txId: string;
     boc: string
 }
 export const updateOrder = async (p: IUpdateOrderParasm) => {
@@ -92,7 +91,7 @@ export interface IOrder {
   }
   
 export const queryOrder = async (orderId: string) => {
-    return await axios.post<IOrder>(`${host}/api/pay/update`, {
+    return await axios.post<IOrder>(`${host}/api/pay/query`, {
         orderId
     })
 }

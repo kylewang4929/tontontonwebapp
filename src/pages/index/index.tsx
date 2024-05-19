@@ -11,12 +11,11 @@ import gameState from "../../models/gameState";
 import { Address } from "ton-core";
 import { bindAccount, unBindAccount } from "../../services/api";
 import { useInitDataRaw } from "@tma.js/sdk-react";
-import mall from "../../models/mall";
-import Mall from "../../containers/Mall";
+import products from "../../models/products";
 import ToolBar from "../../containers/ToolBar";
 import Score from "../../components/Score/Score";
 import Leaderboard from "../../containers/Leaderboard";
-import Mission from "../../containers/Mission";
+import Mission from "../../containers/Tasks";
 const StyledApp = styled.div`
   background-color: #C4DB86;
   color: black;
@@ -30,7 +29,6 @@ const AppContainer = styled.div`
 `;
 
 export default observer(() => {
-  mall.products;
   const [tonConnectUI] = useTonConnectUI();
   const { wallet } = useTonConnect();
   const rawAddress = useTonAddress(false);
@@ -47,7 +45,7 @@ export default observer(() => {
       gameState.tonAddress = newAddressa
       gameState.getConfig();
       gameState.queryUserInfo();
-      mall.query()
+      // products.query()
     }
 
   }, [rawAddress])
@@ -107,19 +105,20 @@ export default observer(() => {
                         }}>
                           Start Game
                         </ButtonCom>
-                        <div className="button-grups">
+                        {/* <div className="button-grups">
                           <Leaderboard></Leaderboard>
                           <Mission></Mission>
-                        </div>
+                        </div> */}
                       </div>
                     )
                   }
                 </>
               )
             }
+            <div style={{height: '20px'}}></div>
+            <ToolBar></ToolBar>
 
           </div>
-          {gameState.start && <ToolBar></ToolBar>}
         </div>
       </div>
     </StyledApp>

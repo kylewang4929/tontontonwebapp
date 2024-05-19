@@ -11,6 +11,7 @@
   place-content: center;
 }
 
+
 .hole__mole{
   width: 16vw;
   height: 16vw;
@@ -51,4 +52,26 @@
   top: 0;
   pointer-events: none;
   z-index: 1;
+}
+
+.hole__chuizi {
+  animation: chuiziIn .435s forwards;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes chuiziIn {
+  0% { 
+    transform: rotate(45deg);
+    opacity: 1;
+  }
+  100% { 
+    transform: rotate(-45deg); 
+    opacity: 0;
+  }
 }
