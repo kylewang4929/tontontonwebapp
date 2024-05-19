@@ -9,17 +9,16 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://www.gg4892hv.online', // 要代理的目标地址
+        target: 'http://120.79.55.90:8090', // 要代理的目标地址
         changeOrigin: true,
         // rewrite: path => path.replace(/^\/api/, ''),
       }
     },
-    // https: true,
     // https: {
     //   key: fs.readFileSync('./.cert/key.pem'),
     //   cert: fs.readFileSync('./.cert/cert.pem'),
     // },
-    host: '0.0.0.0',
+    // host: '0.0.0.0',
   },
   plugins: [react(), nodePolyfills()],
   base: ((process.env.GITHUB_REPOSITORY ?? "") + "/").match(/(\/.*)/)?.[1],
