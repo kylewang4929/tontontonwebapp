@@ -39,7 +39,6 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route path="" element={<Index />} />
       <Route path="index" element={<Index />} />
-      <Route path="game" element={<Game />} />
     </Route>
   ),
   // {basename: '/tontontonwebapp'}
@@ -109,18 +108,7 @@ const App = () => {
       />
       <TonConnectUIProvider manifestUrl={manifestUrl}>
         <QueryClientProvider client={queryClient}>
-          {/* <App /> */}
-          <React.StrictMode>
-            {/* <DisplayGate
-              error={SDKProviderError}
-              loading={SDKProviderLoading}
-              initial={SDKInitialState}
-            >
-              <RouterProvider router={router} />
-            </DisplayGate> */}
-            <RouterProvider router={router} />
-
-          </React.StrictMode>
+          <Index />
         </QueryClientProvider>
       </TonConnectUIProvider>
     </>

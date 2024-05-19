@@ -82,7 +82,6 @@ export default observer(() => {
     }
   }, [])
 
-  const navigate = useNavigate();
   return (
     <StyledApp className="page">
       <div className="app-container">
@@ -90,7 +89,11 @@ export default observer(() => {
         {/* {
                 !!wallet && <div className="wallet-menu"><TonConnectButton /></div>
               } */}
-        <Score />
+        {
+          wallet && (
+            <Score />
+          )
+        }
         <Game disabled={!gameState.start}></Game>
 
         <div className="tool-bar-wapper">
