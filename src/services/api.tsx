@@ -109,3 +109,9 @@ export const endGame = async () => {
     })
 }
 
+
+export const queryTasks = async () => {
+    return await axios.get(`${host}/api/task/list`, {
+    })
+}
+

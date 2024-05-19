@@ -9,8 +9,23 @@ export default observer(({open, onCancel}: any) => {
     }, [])
     return (
         <div className="leaderboard">
-            <Modal title="Tasks" onCancel={() => onCancel} show={open}>
+            <Modal title="Tasks" onCancel={() => {onCancel()}} show={open}>
+                {
+                    (tasks.datas || []).map(item => {
+                        return (
+                            <Item key={item.taskid} title={item.name}></Item>
+                        )
+                    })
+                }
             </Modal>
         </div>
     )
 })
+
+const Item = ({title,subTitle}: any) => {
+    return (
+        <div>
+            <div>{title}</div>
+        </div>
+    )
+}
