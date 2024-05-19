@@ -42,7 +42,7 @@ const router = createBrowserRouter(
       <Route path="game" element={<Game />} />
     </Route>
   ),
-  {basename: '/tontontonwebapp'}
+  // {basename: '/tontontonwebapp'}
 );
 
 
