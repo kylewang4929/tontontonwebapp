@@ -14,7 +14,6 @@
 .hole__mole{
   width: 16vw;
   height: 16vw;
-  cursor: pointer;
   position: relative;
   /* top: 24vw; */
 }

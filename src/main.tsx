@@ -18,7 +18,7 @@ const manifestUrl =
     Router,
     RouterProvider,
   } from "react-router-dom";
-  import React from "react";
+  import React, { useEffect } from "react";
 
 
 import Index from './pages/index';
@@ -77,6 +77,9 @@ function SDKInitialState() {
 }
 
 const App = () => {
+  useEffect(() => {
+    (window as any).Telegram.WebApp.expand()
+  }, [])
   return (
     // <SDKProvider options={options}>
     <>
