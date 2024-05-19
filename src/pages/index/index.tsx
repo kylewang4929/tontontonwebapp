@@ -15,6 +15,7 @@ import products from "../../models/products";
 import ToolBar from "../../containers/ToolBar";
 import Score from "../../components/Score/Score";
 import Leaderboard from "../../containers/Leaderboard";
+import playIcon from "../../assets/Play.png";
 import Mission from "../../containers/Tasks";
 const StyledApp = styled.div`
   background-color: #C4DB86;
@@ -100,10 +101,10 @@ export default observer(() => {
                   {
                     !wallet ? <TonConnectButton /> : (
                       <div>
-                        <ButtonCom onClick={() => {
+                        <ButtonCom icon={playIcon} onClick={() => {
                           gameState.startGame()
                         }}>
-                          Start Game
+                          Play
                         </ButtonCom>
                         {/* <div className="button-grups">
                           <Leaderboard></Leaderboard>

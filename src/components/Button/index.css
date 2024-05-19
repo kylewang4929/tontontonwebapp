@@ -5,7 +5,16 @@
     color: #131313;
     text-align: center;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 .my-button:active {
     opacity: 0.6;
+}
+.my-button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
 }
