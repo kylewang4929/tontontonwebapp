@@ -15,9 +15,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import loading from '../../models/loading';
 import products from '../../models/products';
 import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 const TON_UNIT = 1000000000
-export default () => {
+export default observer(() => {
     const [tonConnectUI, setOptions] = useTonConnectUI();
     const [openMission, setOpenMission] = useState(false)
     const [openLeaderBoard, setOpenLeaderBoard] = useState(false)
@@ -106,7 +107,7 @@ export default () => {
         }
     }
 
-
+    console.log('products.products', toJS(products.products))
     const datas = [
         ...products.products.map(item => {
             return {
@@ -149,7 +150,7 @@ export default () => {
             }}></Leaderboard>
         </div>
     )
-}
+})
 
 const Item = ({name,icon, border, onClick}: any) => {
     return (

@@ -154,12 +154,12 @@ class GameStore {
   }
 
   get remainTime() {
-    const value = mapScopeToRemainTime(this.gameState.score)
+    const value = mapScopeToRemainTime(this.userInfo?.point || 0)
     return value
   }
 
   get speed() {
-    const value = mapScopeToSpeed(this.gameState.score)
+    const value = mapScopeToSpeed(this.userInfo?.point || 0)
     return value
   }
   getConfig = async () => {
@@ -244,7 +244,7 @@ class GameStore {
 
   get randomType  () {
     // 根据当前比例
-    const moleWeight = parseInt(`${mapScopeToType(this.gameState.score) * 100}`)
+    const moleWeight = parseInt(`${mapScopeToType(this.userInfo?.point || 0) * 100}`)
     
     let arrData = new Array(100).fill(5);
     
@@ -300,7 +300,7 @@ class GameStore {
     if (hitTarget) {
       const weightData = this.gameConfig.weight[hitTarget.name as keyof Weight]
       this.gameState.moles = newData;
-      this.gameState.score += (weightData * (this.userInfo?.boost || 1))
+      this.userInfo!.point += (weightData * (this.userInfo?.boost || 1))
 
       this.uploadCache.push({
         target: 'mole',
@@ -324,7 +324,7 @@ class GameStore {
     console.log('data', data)
     if (data.status === 200) {
       this.userInfo = data.data;
-      this.gameState.score = data.data.point
+      // this.gameState.score = data.data.point
     }
   }
 

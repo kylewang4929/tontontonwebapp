@@ -5,7 +5,7 @@ import gameState from "../../models/gameState";
 import { observer } from "mobx-react-lite";
 
 const Score = observer(() => {
-  const score = gameState.gameState.score
+  const score = gameState.userInfo?.point
   const remainingTimes = gameState.userInfo?.life
   return (
     <div className="score">
