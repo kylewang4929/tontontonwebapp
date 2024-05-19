@@ -41,7 +41,7 @@ const router = createBrowserRouter(
       <Route path="index" element={<Index />} />
     </Route>
   ),
-  // {basename: '/tontontonwebapp'}
+  {basename: '/tontontonwebapp'}
 );
 
 
