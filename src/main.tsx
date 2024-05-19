@@ -7,8 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "@twa-dev/sdk";
 import eruda from 'eruda'
 import "./index.css";
-import '@tma.js/sdk'
-import bgm from './assets/bgm.mp3';
+import { init } from '@tma.js/sdk';
 // this manifest is used temporarily for development purposes
 const manifestUrl =
   "https://raw.githubusercontent.com/ton-community/tutorials/main/03-client/test/public/tonconnect-manifest.json";
@@ -25,10 +24,23 @@ const manifestUrl =
 
 import Index from './pages/index';
 import Game from './pages/game';
-import { SDKProvider, DisplayGate, type SDKInitOptions } from '@tma.js/sdk-react';
+// import { SDKProvider, DisplayGate, type SDKInitOptions } from '@tma.js/sdk-react';
 import Loading from "./containers/Loading";
 eruda.init();
 
+try {
+  const { mainButton, viewport } = init({});
+  mainButton.on('click', () => viewport.expand());
+  mainButton
+    .setBackgroundColor('#ff0000')
+    .setTextColor('#ffffff')
+    .setText('Expand')
+    .enable()
+    .show();
+  
+} catch (error) {
+  
+}
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -45,8 +57,8 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
-const options: SDKInitOptions = {
-};
+// const options: SDKInitOptions = {
+// };
 interface SDKProviderErrorProps {
   error: unknown;
 }
@@ -79,7 +91,9 @@ function SDKInitialState() {
 const App = () => {
   useEffect(() => {
     try {
-      (window as any).Telegram.WebApp.expand()
+      setTimeout(() => {
+        (window as any).Telegram.WebApp.expand()
+      }, 1000)
     } catch (error) {
       console.error(error)
     }
