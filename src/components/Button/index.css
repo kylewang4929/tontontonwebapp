@@ -1,7 +1,8 @@
 .my-button {
     background-color: rgba(255,255,255,0.4);
     border-radius: 30px;
-    padding: 10px 24px;
+    padding: 0px 26px;
+    height: 3rem;
     color: #131313;
     text-align: center;
     cursor: pointer;
@@ -16,5 +17,5 @@
 .my-button-icon {
     width: 20px;
     height: 20px;
-    margin-right: 4px;
+    margin-right:10px;
 }

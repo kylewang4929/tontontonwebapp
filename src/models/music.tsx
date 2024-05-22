@@ -11,13 +11,14 @@ class Music {
 
   runHit() {
     const hitAudio= new Audio(hit)
-    hitAudio.volume = 0.6
+    hitAudio.currentTime = 0.1
+    hitAudio.volume = 0.4
     hitAudio.play()
   }
 
   run () {
     this.audio.loop = true; // 设置音频循环播放
-    this.audio.volume = 0.6
+    this.audio.volume = 0.4
     this.audio.play(); // 播放音频
   }
   stop () {

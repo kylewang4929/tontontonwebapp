@@ -29,11 +29,11 @@ const Hole = observer(({ moleId }: any) => {
   
   const icon = status === 1 ? typeState.kIcon: typeState.icon
   return <div className="hole">
-      {
+      {/* {
         status === 1 && (
           <img src={chuizi} className="hole__chuizi"></img>
         )
-      }
+      } */}
       <img src={tukeng} className="hole__mask"></img>
       <div className="hole__mole__wapper">
         <img onClick={() => handleMoleClicked(moleId)} className={`hole__mole ${active ? 'active': 'un-active'}`} src={icon}></img>

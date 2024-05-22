@@ -1,10 +1,10 @@
 import './index.css'
 import { Locales, useTonConnectUI } from '@tonconnect/ui-react';
 import { beginCell } from 'ton-core'
-import fIcon from './images/4-1.png.png';
+import fIcon from './images/ti.png';
 import dIcon from './images/Frame3.png';
 import huojianIcon from './images/huojian.png';
-import moneyIcon from './images/money-1.png.png';
+import moneyIcon from './images/ts.png';
 import mainAddress from '../../config/mainAddress';
 import { createOrder, queryOrder, updateOrder } from '../../services/api';
 import sleep from '../../utils/sleep';
@@ -16,6 +16,7 @@ import loading from '../../models/loading';
 import products from '../../models/products';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
+
 
 const TON_UNIT = 1000000000
 export default observer(() => {
