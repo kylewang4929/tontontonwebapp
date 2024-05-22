@@ -15,9 +15,9 @@ interface IBindAccountParams {
     walletStateInit: string
 }
 // const host = 'http://120.79.55.90:8090'
-// const host = ''
+const host = ''
 // const host = 'https://moleverse.net'
-const host = 'https://www.gg4892hv.online'
+// const host = 'https://www.gg4892hv.online'
 
 export const bindAccount = async (params: IBindAccountParams) => {
     return await axios.post(`${host}/api/user/connectWallet`, {
