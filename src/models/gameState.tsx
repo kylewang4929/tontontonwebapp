@@ -17,6 +17,8 @@ import blackIconK from '../assets/black_k.png';
 import blueIcon from '../assets/blue.png';
 import blueIconK from '../assets/blue_k.png';
 
+import { postEvent } from '@tma.js/sdk';
+
 
 import monkey from '../assets/mole.png';
 import { IGameTarget, endGame, getGameConfig, getUserProfile, submitGameData } from "../services/api";
@@ -294,12 +296,16 @@ class GameStore {
     }, 200)
   }
 
+  vibrate = () => {
+    postEvent('web_app_trigger_haptic_feedback', { type: 'impact', impact_style: 'heavy' });
+  }
+
   // 打击地鼠
   whackMole = ({ moleId }: { moleId: number }) => {
  
     music.runHit()
     this.runShake();
-    navigator.vibrate(200);
+    this.vibrate();
 
     let hitType = -1
     const newData = this.gameState.moles.map((mole: any, i: any) => {

@@ -6,8 +6,8 @@ import { observer } from "mobx-react-lite";
 import icon from './btb.png'
 
 const Score = observer(() => {
-  const score = gameState.userInfo?.point || '--'
-  const remainingTimes = gameState.userInfo?.life || '--'
+  const score = gameState.userInfo?.point || 0
+  const remainingTimes = gameState.userInfo?.life || 0
   return (
     <div className="score">
       <div className="score-title">
