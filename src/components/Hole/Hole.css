@@ -55,7 +55,7 @@
 }
 
 .hole__chuizi {
-  animation: chuiziIn .435s forwards;
+  animation: chuiziIn .335s forwards;
   width: 30px;
   height: 30px;
   position: absolute;
@@ -67,11 +67,11 @@
 
 @keyframes chuiziIn {
   0% { 
-    transform: rotate(45deg);
+    transform: rotate(0deg) translateX(5vw);
     opacity: 1;
   }
   100% { 
-    transform: rotate(-45deg); 
+    transform: rotate(-45deg) translateX(-10vw); 
     opacity: 0;
   }
 }

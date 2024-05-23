@@ -6,14 +6,16 @@ import { observer } from "mobx-react-lite";
 import tukeng from '../../assets/tukeng.png';
 import chuizi from './chuizi.png';
 import music from "../../models/music";
+import sleep from "../../utils/sleep";
 const Hole = observer(({ moleId }: any) => {
   const {moles, moleStatus} = gameState.gameState;
   const { start: gameStarted } = gameState;
  
-  const handleMoleClicked = (moleId: any) => {
+  const handleMoleClicked = async (moleId: any) => {
     if (!gameStarted) {
       return;
     }
+    await sleep(100)
     gameState.whackMole({moleId: moleId})
   };
   const id = moles[moleId] || 0
