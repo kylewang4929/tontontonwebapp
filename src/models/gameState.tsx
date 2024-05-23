@@ -306,11 +306,8 @@ class GameStore {
 
   // 打击地鼠
   whackMole = ({ moleId }: { moleId: number }) => {
- 
-    music.runHit()
     this.runShake();
     this.vibrate();
-
     let hitType = -1
     const newData = this.gameState.moles.map((mole: any, i: any) => {
       if (i === moleId) {

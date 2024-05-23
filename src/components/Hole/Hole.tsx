@@ -5,6 +5,7 @@ import gameState from "../../models/gameState";
 import { observer } from "mobx-react-lite";
 import tukeng from '../../assets/tukeng.png';
 import chuizi from './chuizi.png';
+import music from "../../models/music";
 const Hole = observer(({ moleId }: any) => {
   const {moles, moleStatus} = gameState.gameState;
   const { start: gameStarted } = gameState;
@@ -36,7 +37,10 @@ const Hole = observer(({ moleId }: any) => {
       } */}
       <img src={tukeng} className="hole__mask"></img>
       <div className="hole__mole__wapper">
-        <img onClick={() => handleMoleClicked(moleId)} className={`hole__mole ${active ? 'active': 'un-active'}`} src={icon}></img>
+        <img onClick={() => {
+          music.runHit()
+          handleMoleClicked(moleId)
+        }} className={`hole__mole ${active ? 'active': 'un-active'}`} src={icon}></img>
       </div>
   </div>;
 });
