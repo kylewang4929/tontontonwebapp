@@ -1,8 +1,9 @@
 .my-button {
-    background-color: rgba(255,255,255,0.4);
-    border-radius: 30px;
-    padding: 0px 26px;
-    height: 3rem;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 2rem;
+    padding: 0rem 1.2rem;
+    font-size: 0.8rem;
+    height: 2.4rem;
     color: #131313;
     text-align: center;
     cursor: pointer;
@@ -15,7 +16,7 @@
     opacity: 0.6;
 }
 .my-button-icon {
-    width: 20px;
-    height: 20px;
-    margin-right:10px;
+    width: 1rem;
+    height: 1rem;
+    margin-right:0.2rem;
 }
