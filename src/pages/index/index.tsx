@@ -120,13 +120,11 @@ export default observer(() => {
             {
               wallet && (
                 <>
-                  <div style={{height: '20px'}}></div>
+                  <div style={{height: '1vh'}}></div>
                   <ToolBar></ToolBar>
                 </>
               )
             }
-            
-
           </div>
         </div>
       </div>
