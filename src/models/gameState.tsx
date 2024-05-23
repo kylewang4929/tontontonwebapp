@@ -104,6 +104,9 @@ export interface UserInfo {
 }
 
 class GameStore {
+
+  shake = false // 是否震动
+
   userInfo:UserInfo | null = null
 
   tonAddress = ''// 当前地址
@@ -270,6 +273,14 @@ class GameStore {
     });
   }
 
+  runShake = () => {
+    if (this.shake) return;
+    this.shake = true
+    setTimeout(() => {
+      this.shake = false
+    }, 200)
+  }
+
   whackMole = ({ moleId }: { moleId: number }) => {
     /**
      * TODO 
@@ -278,6 +289,9 @@ class GameStore {
      * 调用接口上报
      */
     music.runHit()
+    this.runShake();
+    navigator.vibrate(200);
+
     let hitType = -1
     const newData = this.gameState.moles.map((mole: any, i: any) => {
       if (i === moleId) {

@@ -83,7 +83,7 @@ export default observer(() => {
   }, [])
 
   return (
-    <StyledApp className="page">
+    <StyledApp className={`page ${gameState.shake ? 'shake': ''}`}>
       <div className="app-container">
 
         {/* {
