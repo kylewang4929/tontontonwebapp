@@ -4,16 +4,16 @@ import hit from '../assets/hit.mp3';
 
 class Music {
     audio= new Audio(bgm)
+    hitAudio= new Audio(hit)
     
   constructor() {
     makeAutoObservable(this);
   }
 
   runHit() {
-    const hitAudio= new Audio(hit)
-    hitAudio.currentTime = 0.1
-    hitAudio.volume = 0.4
-    hitAudio.play()
+    this.hitAudio.currentTime = 0.1
+    this.hitAudio.volume = 0.4
+    this.hitAudio.play()
   }
 
   run () {

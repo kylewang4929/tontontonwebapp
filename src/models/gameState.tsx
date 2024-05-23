@@ -297,7 +297,11 @@ class GameStore {
   }
 
   vibrate = () => {
-    postEvent('web_app_trigger_haptic_feedback', { type: 'impact', impact_style: 'heavy' });
+    try {
+      postEvent('web_app_trigger_haptic_feedback', { type: 'impact', impact_style: 'heavy' });
+    } catch (error) {
+      
+    }
   }
 
   // 打击地鼠
