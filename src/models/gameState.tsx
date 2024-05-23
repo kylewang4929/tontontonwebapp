@@ -77,6 +77,8 @@ const defaultData = {
   score: 0
 }
 
+type TGameType = 'Normal' | 'Roguelike'
+
 export interface IGameConfig {
   remainCount: number
   turnTime: number
@@ -104,6 +106,8 @@ export interface UserInfo {
 }
 
 class GameStore {
+
+  gameType: TGameType = 'Normal'
 
   shake = false // 是否震动
 
@@ -172,9 +176,15 @@ class GameStore {
     }
   }
 
-  startGame = () => {
+  startGame = (type: TGameType) => {
+    this.gameType = type;
+
+    // 播放音乐
     music.run()
+    // 清除计时器
     this.clean();
+
+    // 检查是否需要隐藏地鼠
     this.interval = setInterval(() => {
       const nowTime = new Date().getTime()
       this.gameState.moleCreateTimes.map((item, i) => {
@@ -191,6 +201,7 @@ class GameStore {
     },100)
 
 
+    // 生成地鼠
     this.intervalRun = setInterval(() => {
       const activeMoles = this.gameState.moles.filter((mole: any, i: number) => {
         return mole
@@ -205,6 +216,7 @@ class GameStore {
       }
     }, 50)
 
+    // 提交游戏数据
     this.submitInterval = setInterval(async () => {
       if (this.uploadCache.length > 0) {
         const data = await submitGameData([...this.uploadCache])
@@ -245,12 +257,11 @@ class GameStore {
     this.submitInterval && clearInterval(this.submitInterval)
   }
 
+  // 随机获取地鼠类型
   get randomType  () {
     // 根据当前比例
     const moleWeight = parseInt(`${mapScopeToType(this.userInfo?.point || 0) * 100}`)
-    
     let arrData = new Array(100).fill(5);
-    
     // 1 ~ 4 随机
     for (let i = 0; i< moleWeight; i++) {
       const randomNum = Math.floor(Math.random() * 5);
@@ -260,6 +271,7 @@ class GameStore {
     return arrData[random]
   }
 
+  // 添加地鼠
   addRandomMole = ({ moleId }: { moleId: number }) => {
     this.gameState.moles = this.gameState.moles.map((mole: any, i: any) => {
       if (i === moleId) {
@@ -273,6 +285,7 @@ class GameStore {
     });
   }
 
+  // 抖动屏幕
   runShake = () => {
     if (this.shake) return;
     this.shake = true
@@ -281,13 +294,9 @@ class GameStore {
     }, 200)
   }
 
+  // 打击地鼠
   whackMole = ({ moleId }: { moleId: number }) => {
-    /**
-     * TODO 
-     * 计算积分
-     * 缓存数据
-     * 调用接口上报
-     */
+ 
     music.runHit()
     this.runShake();
     navigator.vibrate(200);
@@ -304,9 +313,8 @@ class GameStore {
       return mole;
     })
     
-    console.log('hitType', hitType,this.gameState.moles[moleId])
-    if (hitType == 5) {
-      // 失败
+    // Normal 模式直接结束游戏
+    if (hitType == 5 && this.gameType === 'Normal') {
       this.endGame();
       return 
     }
@@ -335,10 +343,8 @@ class GameStore {
 
   queryUserInfo = async () => {
     const data = await getUserProfile();
-    console.log('data', data)
     if (data.status === 200) {
       this.userInfo = data.data;
-      // this.gameState.score = data.data.point
     }
   }
 

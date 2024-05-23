@@ -103,16 +103,17 @@ export default observer(() => {
                 <>
                   {
                     !wallet ? <TonConnectButton /> : (
-                      <div>
+                      <div className="play-buttons">
                         <ButtonCom icon={playIcon} onClick={() => {
-                          gameState.startGame()
+                          gameState.startGame("Normal")
                         }}>
-                          Play
+                          Mode 1
                         </ButtonCom>
-                        {/* <div className="button-grups">
-                          <Leaderboard></Leaderboard>
-                          <Mission></Mission>
-                        </div> */}
+                        <ButtonCom icon={playIcon} onClick={() => {
+                          gameState.startGame('Roguelike')
+                        }}>
+                          Mode 2
+                        </ButtonCom>
                       </div>
                     )
                   }
