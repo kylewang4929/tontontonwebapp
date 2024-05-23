@@ -6,15 +6,15 @@ import { observer } from "mobx-react-lite";
 import icon from './btb.png'
 
 const Score = observer(() => {
-  const score = gameState.userInfo?.point || 0
-  const remainingTimes = gameState.userInfo?.life || 0
+  const score = gameState.userInfo?.point || '--'
+  const remainingTimes = gameState.userInfo?.life || '--'
   return (
     <div className="score">
       <div className="score-title">
         <img src={icon}></img>
       {score}
       </div>
-      <div className="score-tips">Remaining times: {remainingTimes}</div>
+      <div className="score-tips">Life: {remainingTimes}</div>
     </div>
   );
 });

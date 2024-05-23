@@ -89,11 +89,7 @@ export default observer(() => {
         {/* {
                 !!wallet && <div className="wallet-menu"><TonConnectButton /></div>
               } */}
-        {
-          wallet && (
-            <Score />
-          )
-        }
+        <Score />
         <Game disabled={!gameState.start}></Game>
 
         <div className="tool-bar-wapper">
