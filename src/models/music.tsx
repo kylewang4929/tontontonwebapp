@@ -11,7 +11,7 @@ class Music {
   }
 
   runHit() {
-    this.hitAudio.currentTime = 0.2
+    this.hitAudio.currentTime = 0.14
     this.hitAudio.volume = 0.4
     this.hitAudio.play()
   }
