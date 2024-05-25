@@ -332,7 +332,7 @@ class GameStore {
       this.userInfo!.point += (weightData * (this.userInfo?.boost || 1))
 
       this.uploadCache.push({
-        target: 'mole',
+        target: hitTarget.name,
         hitTime: new Date().getTime()
       })
     }

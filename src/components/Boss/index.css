@@ -1,0 +1,107 @@
+.boss-modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #030420, #000000 70%);
+    z-index: 99;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.boss-wapper {
+    scale: 4.2;
+    position: relative;
+    top: 2vh;
+}
+.life-container {
+    border-radius: 1rem;
+    width: 70%;
+    height: 1.2rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    top: 6%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.life-container .inner {
+    background-color: #e8202a;
+    height: 100%;
+    border-radius: 1rem;
+}
+
+.limit-time {
+    color: #fff;
+    font-size: 7rem;
+    font-weight: bold;
+    position: absolute;
+    top: 11%;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  :root {
+    --thunder-duration: 10s;
+    --thunder-delay: 5s;
+  }
+  
+  hr.thunder {
+    border: unset;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    animation-name: thunder;
+    animation-duration: var(--thunder-duration);
+    animation-timing-function: linear;
+    animation-delay: var(--thunder-delay);
+    animation-iteration-count: infinite;
+  }
+  
+  hr:not(.thunder) {
+    width: 50px;
+    border-color: transparent;
+    border-right-color: rgba(255, 255, 255, 0.7);
+    border-right-width: 50px;
+    position: absolute;
+    bottom: 100%;
+    transform-origin: 100% 50%;
+    animation-name: rain;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes rain {
+    from {
+      transform: rotate(105deg) translateX(0);
+    }
+    to {
+      transform: rotate(105deg) translateX(calc(100vh + 20px));
+    }
+  }
+  
+  @keyframes thunder {
+    0% {
+      background-color: transparent;
+    }
+    1% {
+      background-color: white;
+    }
+    2% {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    8% {
+      background-color: transparent;
+    }
+  }

@@ -17,6 +17,7 @@ import Score from "../../components/Score/Score";
 import Leaderboard from "../../containers/Leaderboard";
 import playIcon from "../../assets/Play.png";
 import Mission from "../../containers/Tasks";
+import Boss from "../../containers/Boss";
 const StyledApp = styled.div`
   background-color: #C4DB86;
   color: black;
@@ -128,6 +129,7 @@ export default observer(() => {
           </div>
         </div>
       </div>
+      <Boss></Boss>
     </StyledApp>
   )
 })

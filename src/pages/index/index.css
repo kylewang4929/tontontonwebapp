@@ -2,6 +2,8 @@
 .page {
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center center;
+    /* background-image: url('../../assets/bg.jpg'); */
 }
 
 .app-container {

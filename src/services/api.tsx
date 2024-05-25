@@ -49,7 +49,7 @@ export const getUserProfile = async () => {
 }
 
 export interface IGameTarget {
-    target: 'mole'
+    target: string
     hitTime: number
 }
 export const submitGameData = async (params: IGameTarget[]) => {

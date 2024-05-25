@@ -5,7 +5,6 @@
   background-size: cover;
   margin: 1.5vh;
   position: relative;
-  background-image: url('../../assets/tukeng_wapper.png');
   display: flex;
   place-items: center;
   place-content: center;
@@ -27,22 +26,31 @@
 }
 @keyframes holeIn {
   0% { top: 24vw; }
-  100% { top: 0; }
+  100% { top: 4vw; }
 }
 @keyframes holeOut {
-  0% { top: 0; }
-  50% { top: 0; }
+  0% { top: 4vw; }
   100% { top: 24vw; }
 }
 .hole__mole__wapper {
   width: 22vw;
-  height: 14vw;
+  height: 21vw;
   overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
   display: flex;
   justify-content: center;
+}
+.hole__mask__wapper {
+  width: 22vw;
+  height: 22vw;
+  left: 0;
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  z-index: 3;
 }
 .hole__mask {
   width: 22vw;
