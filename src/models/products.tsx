@@ -1,10 +1,5 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import cock from '../assets/cock.png';
-import elephant from '../assets/elephant.png';
-import lion from '../assets/lion.png';
-import moleIcon from '../assets/mole.png';
-import monkey from '../assets/monkey.png';
-import { getGameConfig, getProducts } from "../services/api";
+import { makeAutoObservable } from "mobx";
+import { getProducts } from "../services/api";
 
 const defaultData = {
   gameOver: false,

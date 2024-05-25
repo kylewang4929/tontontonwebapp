@@ -1,20 +1,15 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import cock from '../assets/cock.png';
-import elephant from '../assets/elephant.png';
-import lion from '../assets/lion.png';
-import moleIcon from '../assets/mole.png';
-import monkey from '../assets/monkey.png';
-import { getGameConfig, getLeaderboard, getProducts } from "../services/api";
+import { makeAutoObservable } from "mobx";
+import { getLeaderboard } from "../services/api";
 
-interface ILeaderboard{
+interface ILeaderboard {
   name: string;
   point: number
 }
 
 class Leaderboard {
-    
-    datas: ILeaderboard[] = [
-    ];
+
+  datas: ILeaderboard[] = [
+  ];
   constructor() {
     makeAutoObservable(this);
   }
