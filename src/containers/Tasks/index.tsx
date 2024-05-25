@@ -35,18 +35,3 @@ export default observer(({ open, onCancel }: any) => {
         </div>
     )
 })
-
-const Item = ({ item, subTitle }: any) => {
-    console.log('item data', item)
-    return (
-        <div></div>
-        // <div className="task-item" key={item.taskid}>
-        //     <div className="task-icon">
-        //         {item.name.substring(0, 1)}
-        //     </div>
-        //     <div className="task-name">{item.name.substring(0, 8)}</div>
-        //     <div className="task-value">{item.point}</div>
-        //     <div className="task-value">{item.life}</div>
-        // </div>
-    )
-}

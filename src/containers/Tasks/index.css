@@ -15,12 +15,15 @@
 }
 .task-name {
     font-size: 1.2rem;
+    display: flex;
+    flex: 1;
+    word-break: break-all;
 }
 .task-value {
     display: flex;
     text-align: right;
     font-size: 1.4rem;
-    flex: 1;
+    /* flex: 1; */
     font-weight: bold;
     justify-content: flex-end
 }
