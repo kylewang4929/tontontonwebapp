@@ -1,6 +1,5 @@
-import { makeAutoObservable, runInAction, toJS } from "mobx";
-import moleIcon from '../assets/mole.png';
-import moleIconK from '../assets/mole_k.png';
+import { makeAutoObservable, runInAction } from "mobx";
+import { default as moleIcon, default as moleIconK } from '../assets/mole.png';
 
 import greenMole from '../assets/green.png';
 import greenMoleK from '../assets/green_k.png';
@@ -20,7 +19,6 @@ import blueIconK from '../assets/blue_k.png';
 import { postEvent } from '@tma.js/sdk';
 
 
-import monkey from '../assets/mole.png';
 import { IGameTarget, endGame, getGameConfig, getUserProfile, submitGameData } from "../services/api";
 import music from "./music";
 

@@ -3,17 +3,28 @@ import { observer } from "mobx-react-lite"
 import './index.css'
 import Modal from "../../components/Modal"
 import tasks from "../../models/tasks"
-export default observer(({open, onCancel}: any) => {
+export default observer(({ open, onCancel }: any) => {
     useEffect(() => {
-        tasks.query();
+        const data = tasks.query();
+        console.log('task ddddddddd', tasks.datas);
     }, [])
     return (
-        <div className="leaderboard">
-            <Modal title="Tasks" onCancel={() => {onCancel()}} show={open}>
+        <div className="task">
+            <Modal title="Tasks" onCancel={() => { onCancel() }} show={open}>
                 {
-                    (tasks.datas || []).map(item => {
+                    tasks?.datas?.length === 0 && (
+                        <div className="leaderboard-empty">No Record</div>
+                    )
+                }
+                {
+                    (tasks.datas || []).map((item, index) => {
                         return (
-                            <Item key={item.taskid} title={item.name}></Item>
+                            <div className="task-item" key={item.taskid}>
+                               
+                                <div className="task-name">{item.name.substring(0, 8)}</div>
+                                <div className="task-value">{item.point}</div>
+                                <div className="task-value">{item.life}</div>
+                            </div>
                         )
                     })
                 }
@@ -22,10 +33,17 @@ export default observer(({open, onCancel}: any) => {
     )
 })
 
-const Item = ({title,subTitle}: any) => {
+const Item = ({ item, subTitle }: any) => {
+    console.log('item data', item)
     return (
-        <div>
-            <div>{title}</div>
-        </div>
+        <div></div>
+        // <div className="task-item" key={item.taskid}>
+        //     <div className="task-icon">
+        //         {item.name.substring(0, 1)}
+        //     </div>
+        //     <div className="task-name">{item.name.substring(0, 8)}</div>
+        //     <div className="task-value">{item.point}</div>
+        //     <div className="task-value">{item.life}</div>
+        // </div>
     )
 }
