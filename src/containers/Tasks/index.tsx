@@ -11,23 +11,26 @@ export default observer(({ open, onCancel }: any) => {
     return (
         <div className="task">
             <Modal title="Tasks" onCancel={() => { onCancel() }} show={open}>
-                {
-                    tasks?.datas?.length === 0 && (
-                        <div className="leaderboard-empty">No Record</div>
-                    )
-                }
-                {
-                    (tasks.datas || []).map((item, index) => {
-                        return (
-                            <div className="task-item" key={item.taskid}>
-                               
-                                <div className="task-name">{item.name.substring(0, 8)}</div>
-                                <div className="task-value">{item.point}</div>
-                                <div className="task-value">{item.life}</div>
-                            </div>
+                <div className="task-wrapper">
+                    {
+                        tasks?.datas?.length === 0 && (
+                            <div className="leaderboard-empty">No Record</div>
                         )
-                    })
-                }
+                    }
+                    {
+                        (tasks.datas || []).map((item, index) => {
+                            return (
+                                <div className="task-item" key={item.taskid}>
+                                    <div className="task-name">{item.name}</div>
+                                    <div className="task-value">{item.point}</div>
+                                    {item.life > 0 &&
+                                        <div className="task-value">{item.life}</div>
+                                    }
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </Modal>
         </div>
     )
