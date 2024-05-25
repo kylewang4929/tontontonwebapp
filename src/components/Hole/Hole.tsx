@@ -35,6 +35,8 @@ const Hole = observer(({ moleId }: any) => {
   const icon = status === 1 ? typeState.kIcon: typeState.icon
   return <HoleComponent active={active} icon={icon} onClick={() => {
     music.runHit()
+    gameState.runShake();
+    gameState.vibrate();
     handleMoleClicked(moleId)
   }}></HoleComponent>
   // return <div className="hole">

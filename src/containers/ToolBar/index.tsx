@@ -112,13 +112,15 @@ export default observer(() => {
     const datas = [
         ...products.products.map(item => {
             return {
-                icon: dIcon,
+                // icon: dIcon,
+                icon: '🚀',
                 id: item.name,
                 ...item,
             }
         }),
-        {icon: fIcon, name: 'Tasks', id: "TASKS",},
-        {icon: moneyIcon, name: 'Ranking', id: "RANKING"},
+        {icon: '🤝', name: 'Invite Fren', id: "InviteFren",},
+        {icon: '💠', name: 'Tasks', id: "TASKS",},
+        {icon: '🏆', name: 'Ranking', id: "RANKING"},
     ]
     return (
         <div className='tool-bar'>
@@ -156,7 +158,8 @@ export default observer(() => {
 const Item = ({name,icon, border, onClick}: any) => {
     return (
         <div onClick={onClick} className={`item ${border ? "border": ''}`}>
-            <img src={icon}></img>
+            {/* <img src={icon}></img> */}
+            <div>{icon}</div>
             <span>{name}</span>
         </div>
     )

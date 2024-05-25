@@ -1,9 +1,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import bgm from '../assets/bgm.mp3';
 import hit from '../assets/hit.mp3';
+import boss from '../assets/boss.mp3';
 
 class Music {
     audio= new Audio(bgm)
+    bossAudio= new Audio(boss)
     hitAudio= new Audio(hit)
     
   constructor() {
@@ -20,6 +22,14 @@ class Music {
     this.audio.loop = true; // 设置音频循环播放
     this.audio.volume = 0.4
     this.audio.play(); // 播放音频
+  }
+  playBossBGM () {
+    this.bossAudio.loop = true; // 设置音频循环播放
+    this.bossAudio.volume = 0.4
+    this.bossAudio.play(); // 播放音频
+  }
+  stopBossBGM() {
+    this.bossAudio.pause();
   }
   stop () {
     this.audio.pause();

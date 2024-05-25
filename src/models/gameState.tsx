@@ -21,6 +21,7 @@ import { postEvent } from '@tma.js/sdk';
 
 import { IGameTarget, endGame, getGameConfig, getUserProfile, submitGameData } from "../services/api";
 import music from "./music";
+import sleep from "../utils/sleep";
 
 const params = [
   {scope: 50, remainTime: 3000, speed: 1000, moleWeight: 1},
@@ -107,6 +108,11 @@ export interface UserInfo {
 
 class GameStore {
 
+  bossConfig = {
+    show: false,
+    life: 100
+  }
+
   gameType: TGameType = 'Normal'
 
   shake = false // 是否震动
@@ -160,6 +166,12 @@ class GameStore {
     makeAutoObservable(this);
   }
 
+  runBoss = () => {
+    this.bossConfig.show = true
+  }
+  closeBoss = () => {
+    this.bossConfig.show = false
+  }
   get remainTime() {
     const value = mapScopeToRemainTime(this.userInfo?.point || 0)
     return value
@@ -202,14 +214,14 @@ class GameStore {
 
 
     // 生成地鼠
-    this.intervalRun = setInterval(() => {
+    this.intervalRun = setInterval(async () => {
       const activeMoles = this.gameState.moles.filter((mole: any, i: number) => {
         return mole
       }).length;
       if (!this.gameState.gameOver && activeMoles < this.maxActive && this.start) {
         const currentTime = new Date().getTime();
         if ((currentTime - this.prevAddTime) >= this.speed) {
-          const randomMole = this.getRandomMole();
+          const randomMole = await this.getRandomMole();
           this.addRandomMole({moleId: randomMole});
           this.prevAddTime = new Date().getTime();
         }
@@ -229,18 +241,19 @@ class GameStore {
     this.start = true
   }
 
-  getRandomMole= (): number => {
+  getRandomMole= async (): Promise<number> => {
     // 找到下一个点
     const randomMole = Math.floor(Math.random() * Math.floor(8) + 1);
     const mole = this.gameState.moles[randomMole]
     if (mole) {
       // 重新计算
-      return this.getRandomMole();
+      return await this.getRandomMole();
     }
     const nowTime = new Date().getTime()
     if ((nowTime - this.hideTime[randomMole]) < 800) {
       // 保护期 重新计算
-      return this.getRandomMole();
+      await sleep(200)
+      return await this.getRandomMole();
     }
     return randomMole
   }
@@ -304,8 +317,6 @@ class GameStore {
 
   // 打击地鼠
   whackMole = ({ moleId }: { moleId: number }) => {
-    this.runShake();
-    this.vibrate();
     let hitType = -1
     const newData = this.gameState.moles.map((mole: any, i: any) => {
       if (i === moleId) {
@@ -327,7 +338,18 @@ class GameStore {
     if (hitTarget) {
       const weightData = this.gameConfig.weight[hitTarget.name as keyof Weight]
       this.gameState.moles = newData;
-      this.userInfo!.point += (weightData * (this.userInfo?.boost || 1))
+
+      const point = (weightData * (this.userInfo?.boost || 1))
+
+      const bossScope = 300
+      const oldOffset = Math.floor(this.userInfo!.point / bossScope)
+      this.userInfo!.point += point
+      const newOffset = Math.floor(this.userInfo!.point / bossScope)
+
+      if (point > 0 && this.gameType === "Roguelike" && newOffset > oldOffset) {
+        // 跨过bossScope
+        this.runBoss();
+      }
 
       this.uploadCache.push({
         target: hitTarget.name,

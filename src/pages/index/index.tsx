@@ -78,6 +78,7 @@ export default observer(() => {
         }
       }
     );
+
     return () => {
       unsubscribe();
     }
@@ -129,7 +130,12 @@ export default observer(() => {
           </div>
         </div>
       </div>
-      <Boss></Boss>
+      {
+        gameState.bossConfig.show && (
+          <Boss></Boss>
+        )
+      }
+      
     </StyledApp>
   )
 })

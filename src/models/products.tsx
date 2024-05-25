@@ -31,7 +31,7 @@ class GameStore {
           productId: key
         }
       })
-      this.products = newData.filter(item => item.currency === 'TON')
+      this.products = [newData[0]]
     }
   }
 }
